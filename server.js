@@ -22,7 +22,7 @@ let router = express.Router()
 
 // Route test. 
 router.get('/', function(req, res) {
-    res.json({ message: 'Beleza! Bem vindo a nossa Loja.'})
+    res.json({ message: 'Beleza! Bem vindo(a) a nossa Loja.'})
 });
 
 // definiddo um padrão das rotas prefixadas '/api':
