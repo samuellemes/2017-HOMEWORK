@@ -4,7 +4,7 @@
   "description": "Code developed for the homework of the discipline Programming Techniques VI - Univás 2017.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/.bin/mocha --report spec"
   },
   "repository": {
     "type": "git",
