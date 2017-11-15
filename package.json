@@ -1,0 +1,21 @@
+{
+  "name": "2017-homework",
+  "version": "1.0.0",
+  "description": "Code developed for the homework of the discipline Programming Techniques VI - Univás 2017.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samuellemes/2017-HOMEWORK.git"
+  },
+  "dependencies": {
+    "body-parser": "~1.18.2",
+    "express": "~4.16.2",
+    "mongoose": "~4.13.2",
+    "request": "~2.83.0"
+  },
+  "author": "Samuel Barreiro Lemes",
+  "license": "MIT"
+}
