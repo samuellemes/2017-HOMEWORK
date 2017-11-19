@@ -9,10 +9,10 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const user = require('./app/models/user')
+const User = require('./app/models/user')
 
 // URI do mlab:
-mongoose.connect('mongodb://<samuellemes>:<abc123>@ds036079.mlab.com:36079/user', {
+mongoose.connect('mongodb://samuellemes:abc123@ds036079.mlab.com:36079/user', {
     useMongoClient: true
 })
 
@@ -48,6 +48,27 @@ router.get('/', function(req, res) {
 
 // API's:
 // ============================================================================================================
+
+// GET ALL and POST
+router.route('/user')
+
+    /* 1) Method: Create user (acess into: POST http://localhost:8000/api/users) */
+    .post(function(req, res) {
+        const user = new User()
+
+        // Set filds users (request)
+        user.name = req.body.name
+        user.user = req.body.user
+        user.password = req.body.password
+        user.email = req.body.email
+
+        user.save(function(error) {
+            if(error) {
+                res.send('Erro ao tentar salvar user' + error)
+            }
+            res.json({ message: 'User cadastrado com sucesso!' })
+        })
+    })
 
 // definiddo um padrão das rotas prefixadas '/api':
 app.use('/api', router)
