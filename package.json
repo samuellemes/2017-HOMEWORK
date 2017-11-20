@@ -4,7 +4,7 @@
   "description": "Code developed for the homework of the discipline Programming Techniques VI - Univás 2017.",
   "main": "server.js",
   "scripts": {
-    "dev": "nodemon"
+    "start": "nodemon"
   },
   "repository": {
     "type": "git",
