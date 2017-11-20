@@ -52,7 +52,7 @@ router.get('/', function(req, res) {
 // GET ALL and POST
 router.route('/user')
 
-    /* 1) Method: Create user (acess into: POST http://localhost:8000/api/users) */
+    /* 1) Method: Create user (acess in: POST http://localhost:8000/api/users) */
     .post(function(req, res) {
         const user = new User()
 
@@ -67,6 +67,16 @@ router.route('/user')
                 res.send('Erro ao tentar salvar user' + error)
             }
             res.json({ message: 'User cadastrado com sucesso!' })
+        })
+    })
+
+    /* 2) Method: Selecionar users (access in: GET http://localhost:8000/api/users) */
+    .get(function(req, res) {
+        User.find(function(error, user) {
+            if(error) {
+                res.send('Erro ao tentar selecinar todos os users...' + error)
+            }
+            res.json(user)
         })
     })
 
