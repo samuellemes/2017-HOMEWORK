@@ -5,14 +5,17 @@
  * Author: Responsável por levantar o serviço do node para que seja possivel executar a api através do Express.
  */
 
-//  confifurando o Setup da aplicação.
+// Confifurando o Setup da aplicação (chamada dos pacotes):
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const User = require('./app/models/user')
 
-// URI do mlab:
+// Configure mongoos promise:
+mongoose.Promise = global.Promise
+
+// URI do mlab (MongoDB):
 mongoose.connect('mongodb://samuellemes:abc123@ds036079.mlab.com:36079/user', {
     useMongoClient: true
 })
@@ -87,12 +90,37 @@ router.route('/users')
     /* 3) Method: Select by Id: (access in: GET http://localhost:8000/api/users/:user_id)*/
     .get(function(req, res) {
         
-        //Função para selecionar    determinado usuario por ID
+        //Função para selecionar determinado usuario por ID
         User.findById(req.params.user_id, function(error, user) {
             if(error) {
                 res.send('Id do user não encontrado.....: ' + error)
             }
             res.json(user)
+        })
+    })
+
+    /* 4) Method: Update by id: (access in: PUT http://localhost:8000/api/users/:user_id) */
+    .put(function(req, res) {
+
+        // Função para encontrar usuario com determinado ID
+        User.findById(req.params.user_id, function(error, user) {
+            if(error) {
+                res.json('Id do user não encontrado.....: ' + error)
+            }
+
+            // resgatando dados do usuário
+            user.name = req.body.name
+            user.user = req.body.user
+            user.password = req.body.password
+            user.email = req.body.email
+
+            // Salvar as propriedades do user
+            user.save(function(error) {
+                if(error) {
+                    res.send('Erro ao atualizar user....' + error)
+                }
+                res.json({ message: 'User cadastrado com sucesso!' })
+            })
         })
     })
 
