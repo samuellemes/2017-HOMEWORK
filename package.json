@@ -4,7 +4,7 @@
   "description": "Code developed for the homework of the discipline Programming Techniques VI - Univás 2017.",
   "main": "server.js",
   "scripts": {
-    "test": "./node_modules/.bin/mocha --report spec"
+    "dev": "nodemon"
   },
   "repository": {
     "type": "git",
@@ -16,6 +16,9 @@
     "mongoose": "~4.13.2",
     "request": "~2.83.0"
   },
-  "author": "Samuel Barreiro Lemes",
-  "license": "MIT"
+  "author": "Samuel Lemes",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.12.1"
+  }
 }
