@@ -124,6 +124,18 @@ router.route('/users')
         })
     })
 
+    /* 5) Method: Delete by id (access in: DELETE http://localhost:8000/users/:user_id) */
+    .delete(function(req, res) {
+        User.remove({
+          _id: req.params.user_id
+        }, function(error) {
+            if(error) {
+                res.send('Id do user not found...')
+            }
+            res.json({ message: 'User deleted whith sucess!' })
+        })
+    })
+
 // definiddo um padrão das rotas prefixadas '/api':
 app.use('/api', router)
 
