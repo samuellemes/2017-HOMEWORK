@@ -1,3 +1,4 @@
+
 /**
  * Archive: server.js
  * Description:
@@ -50,7 +51,7 @@ router.get('/', function(req, res) {
 // ============================================================================================================
 
 // GET ALL and POST
-router.route('/user')
+router.route('/users')
 
     /* 1) Method: Create user (acess in: POST http://localhost:8000/api/users) */
     .post(function(req, res) {
@@ -75,6 +76,21 @@ router.route('/user')
         User.find(function(error, user) {
             if(error) {
                 res.send('Erro ao tentar selecinar todos os users...' + error)
+            }
+            res.json(user)
+        })
+    })
+
+    /* Rotas '/usser/:user_id' (util tanto para: GET, PUT and DELETE: id) */
+    router.route('/users/:user_id')
+
+    /* 3) Method: Select by Id: (access in: GET http://localhost:8000/api/users/:user_id)*/
+    .get(function(req, res) {
+        
+        //Função para selecionar    determinado usuario por ID
+        User.findById(req.params.user_id, function(error, user) {
+            if(error) {
+                res.send('Id do user não encontrado.....: ' + error)
             }
             res.json(user)
         })
