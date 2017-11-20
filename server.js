@@ -1,57 +1,55 @@
 
 /**
  * Archive: server.js
- * Description:
- * Author: Responsável por levantar o serviço do node para que seja possivel executar a api através do Express.
+ * Description: Responsável por levantar o serviço do node para que seja possivel executar a api através do Express.
+ * Author: Samuel Lemes
  */
 
-// Confifurando o Setup da aplicação (chamada dos pacotes):
+// Configuring application setup (called packages):
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const User = require('./app/models/user')
 
-// Configure mongoos promise:
+// Configuration mongoose promise:
 mongoose.Promise = global.Promise
 
-// URI do mlab (MongoDB):
+// Connection: URI of 'mlab' (data source in cloud MongoDB):
 mongoose.connect('mongodb://samuellemes:abc123@ds036079.mlab.com:36079/user', {
     useMongoClient: true
 })
 
-// Local: MongoDB
+// Connection: URI data source local MongoDB:
 // mongoose.connect('mongodb://localhost:27017/user', {
 //     useMongoClient: true
 // })
 
-// Configurando a variavel app para usar o 'bodyParser()'. E retornar os dados de um json e via post:
+// Setting the 'app' variable to use 'bodyParser()' and returning the data from a json (POST):
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
-// Definindo a porta onde será executada a api:
+// Defining the port where the api will be executed:
 const port = process.env.port || 8000
 
 
-// Rotas da API
-// =========================================================================================================
+// Rotas da API // ========================================================================================================
 
-// Criando uma instância das rotas via Express:
+// Creating an instance of the routes (express):
 const router = express.Router()
 
 router.use(function(req, res, next) {
-    console.log('Algo está acontecendo aqui...')
+    console.log('Something is happening here...')
     next()
 })
 
 // Route test. 
 router.get('/', function(req, res) {
-    res.json({ message: 'Beleza! Bem vindo(a) a nossa Loja!' })
+    res.json({ message: 'Hello, welcome here!' })
 })
 
 
-// API's:
-// ============================================================================================================
+// API's // ===============================================================================================================
 
 // GET ALL and POST
 router.route('/users')
@@ -68,32 +66,32 @@ router.route('/users')
 
         user.save(function(error) {
             if(error) {
-                res.send('Erro ao tentar salvar user' + error)
+                res.send('Error trying to save user....' + error)
             }
-            res.json({ message: 'User cadastrado com sucesso!' })
+            res.json({ message: 'User successfully registered!' })
         })
     })
 
-    /* 2) Method: Selecionar users (access in: GET http://localhost:8000/api/users) */
+    /* 2) Method: Select all users (access in: GET http://localhost:8000/api/users) */
     .get(function(req, res) {
         User.find(function(error, user) {
             if(error) {
-                res.send('Erro ao tentar selecinar todos os users...' + error)
+                res.send('Error while trying to select all users...' + error)
             }
             res.json(user)
         })
     })
 
-    /* Rotas '/usser/:user_id' (util tanto para: GET, PUT and DELETE: id) */
+    /* Routes '/users/:user_id' (useful for: GET, PUT and DELETE: id) */
     router.route('/users/:user_id')
 
-    /* 3) Method: Select by Id: (access in: GET http://localhost:8000/api/users/:user_id)*/
+    /* 3) Method: Select by id: (access in: GET http://localhost:8000/api/users/:user_id)*/
     .get(function(req, res) {
         
-        //Função para selecionar determinado usuario por ID
+        // Function to select user by id:
         User.findById(req.params.user_id, function(error, user) {
             if(error) {
-                res.send('Id do user não encontrado.....: ' + error)
+                res.send('User id not found.....: ' + error)
             }
             res.json(user)
         })
@@ -102,24 +100,24 @@ router.route('/users')
     /* 4) Method: Update by id: (access in: PUT http://localhost:8000/api/users/:user_id) */
     .put(function(req, res) {
 
-        // Função para encontrar usuario com determinado ID
+        // Function to select user by id:
         User.findById(req.params.user_id, function(error, user) {
             if(error) {
-                res.json('Id do user não encontrado.....: ' + error)
+                res.send('User id not found.....: ' + error)
             }
 
-            // resgatando dados do usuário
+            // Rescuing user data:
             user.name = req.body.name
             user.user = req.body.user
             user.password = req.body.password
             user.email = req.body.email
 
-            // Salvar as propriedades do user
+            // Saving user properties:
             user.save(function(error) {
                 if(error) {
-                    res.send('Erro ao atualizar user....' + error)
+                    res.send('User update error....' + error)
                 }
-                res.json({ message: 'User cadastrado com sucesso!' })
+                res.json({ message: 'User successfully registered!' })
             })
         })
     })
@@ -130,15 +128,15 @@ router.route('/users')
           _id: req.params.user_id
         }, function(error) {
             if(error) {
-                res.send('Id do user not found...')
+                res.send('User id not found...')
             }
             res.json({ message: 'User deleted whith sucess!' })
         })
     })
 
-// definiddo um padrão das rotas prefixadas '/api':
+// Defining a pattern of the prefixed routes '/api':
 app.use('/api', router)
 
-// Iniciando a aplicação (Server)
+// Starting the application (Server):
 app.listen(port)
 console.log("Iniciando a app na porta " + port)
