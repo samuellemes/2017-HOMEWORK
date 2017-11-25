@@ -30,7 +30,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 // Defining the port where the api will be executed:
-const port = process.env.port || 8000
+const PORT = process.env.port || 8000
 
 
 // Rotas da API // ========================================================================================================
@@ -91,7 +91,7 @@ router.route('/users')
         // Function to select user by id:
         User.findById(req.params.user_id, function(error, user) {
             if(error) {
-                res.send('User id not found.....: ' + error)
+                return res.send('User id not found.....: ' + error)
             }
             res.json(user)
         })
@@ -103,7 +103,7 @@ router.route('/users')
         // Function to select user by id:
         User.findById(req.params.user_id, function(error, user) {
             if(error) {
-                res.send('User id not found.....: ' + error)
+                return res.send('User id not found.....: ' + error)
             }
 
             // Rescuing user data:
@@ -138,5 +138,5 @@ router.route('/users')
 app.use('/api', router)
 
 // Starting the application (Server):
-app.listen(port)
-console.log("Iniciando a app na porta " + port)
+app.listen(PORT)
+console.log("Starting app on port " + PORT)
