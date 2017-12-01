@@ -1,0 +1,58 @@
+body {
+	background-color: #7fffd4;
+    background-size: 100%;
+}
+
+fieldset {
+    width: 400px;
+	margin: 40px auto;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+[type=text],
+[type=password] {
+	width: 90%;
+	height: 20px;
+	border: 2px solid #000;
+	outline: none;
+}
+
+.button {
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+h2 {
+	text-transform: uppercase;	
+	margin: 10px;
+    text-align: center;
+	color: rgb(121, 121, 121);
+    border: 0px;
+	font-family: 'Roboto';
+}
+
+.field {
+	background-color: #FEE3AD;
+}
+
+.field:hover {
+	background-color: #FFF;
+}
+
+.field:focus {
+	border-color: darkorange;
+	background-color: #FFF;
+}
+
+.button {
+	display: block;
+	float: right;
+	background-color: #FFA20F;
+}
