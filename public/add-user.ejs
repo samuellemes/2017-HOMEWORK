@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  
+    <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.no-icons.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="../css/addUser.css">
+
+    <title>User Registration</title>
+  </head>
+
+  <body>
+    <h2>User Registration</h2>
+    <form action="<%= action %>" method="POST">
+        <label for="name">Name:
+            <input class="field" type="text" name="name" value"<%= user.name %>" placeholder="Example name" required />
+        </label> 
+        <label for="user">Username:
+            <input class="field" type="text" name="user" value"<%= user.user %>" placeholder="Example username" required />
+        </label>
+        <label for="password">Password:
+            <input type="password" name="password" pattern=".{6,}" value"<%= user.password %>" placeholder="123456" required />
+        </label>            
+        <label for="email">E-mail:
+            <input class="field" type="text" name="email" value"<%= user.email %>" placeholder="exampl@mail.com" required />
+        </label>
+        <input class="button-save" type="submit" value="Save" />
+        <input class="button-back" type="submit" value="Cancel" onclick="history.back()" />
+        
+    </form>
+  </body>
+</html>
