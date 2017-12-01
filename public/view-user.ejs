@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap.no-icons.min.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="../css/style.css">
+
+  <title>USERS</title>
+</head>
+
+<body>
+  <section class="container">
+    
+    <h2>LIST OF USERS</h2>
+    
+    <div class="scroll-table">
+      <table class="order-table">
+        <thead>
+          <tr>
+            <th>NAME</th>
+            <th>USERNAME</th>
+            <th>E-MAIL</th>
+            <th>EDIT</th>
+            <th>DELETE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% user.forEach(function(user){ %>
+              <tr>
+                <td><%= user.name %></td>
+                <td><%= user.user %></td>
+                <td><%= user.email %></td>
+                <td><a class="button-edit" href="/api/edit/<%= user._id %>"></a></td>
+                <td><a class="button-delete" href="/api/delete/<%= user._id %>" onclick="return confirm('Tem certeza que deseja excluir?');"></a></td>
+              </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+    <div class="add">
+      ADD USER:
+      <a class="button-addUser" name="Add user" href="/api/add"></a>
+    </div>
+  </section>
+    </body>
+    
+    </html>
